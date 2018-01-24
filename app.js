@@ -2,9 +2,24 @@
 // Requires
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
+
 
 //inicializar Variables
 var app= express();
+
+
+//body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+
+//importar rutas
+
+var  appRoutes = require('./routes/app');
+var  usuarioRoutes = require('./routes/usuario');
+
 
 
 //conexion a la case de datos
@@ -16,13 +31,9 @@ console.log('Base de Datos: \x1b[32m%s\x1b[0m',' 0nline');
 
 
 //rutas
-app.get('/', (request,respond, next) =>{
-respond.status(403).json({
-    ok:true,
-    mensaje:'peticion correcrta'
-})
+app.use('/usuario',usuarioRoutes);
+app.use('/', appRoutes);
 
-} );
 
 //Escuchar peticiones
 app.listen(3000 ,()=>{
