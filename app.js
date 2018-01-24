@@ -19,7 +19,9 @@ app.use(bodyParser.json());
 
 var  appRoutes = require('./routes/app');
 var  usuarioRoutes = require('./routes/usuario');
-var loginRoutes = require('./routes/login');
+var  loginRoutes = require('./routes/login');
+var  hospitalesRoutes = require('./routes/hospitales');
+
 
 
 
@@ -35,6 +37,8 @@ console.log('Base de Datos: \x1b[32m%s\x1b[0m',' 0nline');
 app.use('/usuario',usuarioRoutes);
 app.use('/', appRoutes);
 app.use('/login', loginRoutes);
+app.use('/hospitales', hospitalesRoutes);
+
 
 
 

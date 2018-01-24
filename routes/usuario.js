@@ -6,7 +6,6 @@ var mdAutentication = require('../middlewares/autentificacion');
 var app = express();
 var Usuario = require("../models/usuario");
 
-//rutas
 
 //=====================================================
 //  Obtener todos los usuarios
@@ -121,7 +120,7 @@ app.delete('/:id',mdAutentication.verificaToken,(request,respuesta)=>{
        if (error) {
         return respuesta.status(400).json({
           ok: false,
-          mensaje: "error creando usuario",
+          mensaje: "error borrando usuario",
           errors: error
         });
       }
