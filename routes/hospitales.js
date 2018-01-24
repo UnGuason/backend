@@ -3,6 +3,9 @@ var app = express();
 
 var Hospital = require("../models/hospitales");
 
+
+var mdAutentication= require('../middlewares/autentificacion');
+
 //=====================================================
 //  obtener hospitales
 //=====================================================
@@ -28,7 +31,7 @@ app.get("/", (request, respond, next) => {
 //=====================================================
 //  insertar hospital
 //=====================================================
-app.post("/", (request, respuesta) => {
+app.post("/", mdAutentication.verificaToken,(request, respuesta) => {
   var body = request.body;
   var hospital = new Hospital({
     nombre: body.nombre,
@@ -61,7 +64,7 @@ app.post("/", (request, respuesta) => {
 //=====================================================
 
 
-app.put("/:id", (request, respuesta) => {
+app.put("/:id",mdAutentication.verificaToken, (request, respuesta) => {
   var id = request.params.id;
   var body = request.body;
 
@@ -103,7 +106,7 @@ app.put("/:id", (request, respuesta) => {
 //  Borrar hospital
 //=====================================================
 
-app.delete('/:id',(request,respuesta)=>{
+app.delete('/:id',mdAutentication.verificaToken,(request,respuesta)=>{
     var id = request.params.id;
   
     Hospital.findByIdAndRemove(id,(error,hospitalBorrado)=>{
