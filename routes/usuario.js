@@ -11,7 +11,13 @@ var Usuario = require("../models/usuario");
 //  Obtener todos los usuarios
 //=====================================================
 app.get("/", (request, respond, next) => {
-  Usuario.find({}, "nombre email img role").exec((error, usuario) => {
+
+  var desde = request.query.desde || 0;
+  desde=Number(desde);
+  Usuario.find({}, "nombre email img role")
+  .skip(desde)
+  .limit(5)
+  .exec((error, usuario) => {
     //si hay error
     if (error) {
       return respuesta.status(500).json({
@@ -21,10 +27,14 @@ app.get("/", (request, respond, next) => {
       });
     }
     //si todo salio bien
-    respond.status(200).json({
-      ok: true,
-      usuarios: usuario
+    Usuario.count({},(error,conteo)=>{
+      respond.status(200).json({ 
+        ok: true,
+        usuarios: usuario,
+        total:conteo
+      });
     });
+  
   });
   return
 });

@@ -23,6 +23,10 @@ var  usuarioRoutes = require('./routes/usuario');
 var  loginRoutes = require('./routes/login');
 var  hospitalesRoutes = require('./routes/hospitales');
 var  medicosRoutes = require('./routes/medicos');
+var  busquedaRoutes = require('./routes/busqueda');
+var  uploadsRoutes = require('./routes/upload');
+var imagenesRoutes = require('./routes/imagenes');
+
 
 
 
@@ -33,13 +37,23 @@ console.log('Base de Datos: \x1b[32m%s\x1b[0m',' 0nline');
 
 });
 
+//server index config
+// var serveIndex = require('serve-index');
+// app.use(express.static(__dirname + '/'))
+// app.use('/uploads', serveIndex(__dirname + '/uploads'));
+
+
 
 //rutas
 app.use('/usuario',usuarioRoutes);
-app.use('/', appRoutes);
 app.use('/login', loginRoutes);
 app.use('/hospitales', hospitalesRoutes);
 app.use('/medicos', medicosRoutes);
+app.use('/busqueda', busquedaRoutes);
+app.use ('/uploads',uploadsRoutes);
+app.use ('/imagenes',imagenesRoutes)
+
+app.use('/', appRoutes);
 
 
 
