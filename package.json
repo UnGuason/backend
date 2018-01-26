@@ -4,7 +4,7 @@
   "description": "servidor backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "author": "leandro curra",
   "license": "ISC",
